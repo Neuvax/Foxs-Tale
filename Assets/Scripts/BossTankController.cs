@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class BossTankController : MonoBehaviour
 {
     public enum bossStates { shooting, hurt, moving, ended };
     public bossStates currentStates;
     public Transform theBoss;
+    public Transform theBar;
     public Animator anim;
 
     [Header("Movement")]
@@ -33,6 +34,7 @@ public class BossTankController : MonoBehaviour
 
     [Header("Health")]
     public int health = 5;
+    public Slider healthBar;
     public GameObject explosion, winPlatform;
     private bool isDefeated;
     public float shotSpeedUp, mineSpeedUp;
@@ -77,6 +79,7 @@ public class BossTankController : MonoBehaviour
                         if(isDefeated)
                         {
                             theBoss.gameObject.SetActive(false);
+                            theBar.gameObject.SetActive(false);
                             Instantiate(explosion, theBoss.position, theBoss.rotation);
                             AudioManager.instance.PlaySFX(3);
 
@@ -129,6 +132,8 @@ public class BossTankController : MonoBehaviour
                 }
                 break;
         }
+        //Boss Health Bar
+        healthBar.value = health;
     }
 
     public void TakeHit()

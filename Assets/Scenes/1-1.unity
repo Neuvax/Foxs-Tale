@@ -462,6 +462,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Pack 2.0
       objectReference: {fileID: 0}
+    - target: {fileID: 2531144949043823522, guid: d02406eab1db1ed4b88c1359d6301d03,
+        type: 3}
+      propertyPath: bounceForce
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2531144949043823526, guid: d02406eab1db1ed4b88c1359d6301d03,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1057,6 +1062,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1870906491002422197, guid: 58fd9b663dece9440967cfa89204f647,
+        type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 8169654078676861588, guid: 58fd9b663dece9440967cfa89204f647,
         type: 3}
       propertyPath: m_Name
