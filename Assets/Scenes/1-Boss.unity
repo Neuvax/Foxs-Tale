@@ -590,6 +590,7 @@ MonoBehaviour:
   theBoss: {fileID: 1198922748}
   theBar: {fileID: 1260125848}
   anim: {fileID: 1198922746}
+  bossActivator: {fileID: 2086562203}
   moveSpeed: 6
   leftPoint: {fileID: 1166017063}
   rightPoint: {fileID: 1820454922}
@@ -5036,6 +5037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossCont: {fileID: 1138238875}
+  bossDamage: {fileID: 1198922750}
 --- !u!61 &1942413083
 BoxCollider2D:
   m_ObjectHideFlags: 0

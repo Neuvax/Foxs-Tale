@@ -11,6 +11,8 @@ public class BossTankController : MonoBehaviour
     public Transform theBar;
     public Animator anim;
 
+    public GameObject bossActivator;
+
     [Header("Movement")]
     public float moveSpeed;
     public Transform leftPoint, rightPoint;
@@ -38,10 +40,21 @@ public class BossTankController : MonoBehaviour
     public GameObject explosion, winPlatform;
     private bool isDefeated;
     public float shotSpeedUp, mineSpeedUp;
+
+    private Vector3  initialPosition, initialScale;
+    private int initialHealth;
+    private float initialTimeBetweenShots, initialtimeBetweenMines;
     // Start is called before the first frame update
     void Start()
     {
         currentStates = bossStates.shooting;
+
+        initialPosition = transform.position;
+        initialHealth = health;
+        initialScale = transform.localScale;
+
+        initialTimeBetweenShots = timeBetweenShots;
+        initialtimeBetweenMines = timeBetweenMines;
     }
 
     // Update is called once per frame
@@ -134,6 +147,37 @@ public class BossTankController : MonoBehaviour
         }
         //Boss Health Bar
         healthBar.value = health;
+
+        // Restart boss battle
+        if(PlayerHealthController.instance.currentHealth <= 0)
+        {
+
+            AudioManager.instance.StopBossMusic();
+
+            health = initialHealth;
+
+            timeBetweenShots = initialTimeBetweenShots;
+            timeBetweenMines = initialtimeBetweenMines;
+
+            theBoss.transform.position = initialPosition;
+
+            theBoss.transform.localScale = initialScale;
+
+            moveRight = false;
+
+            BossTankMine[] mines = FindObjectsOfType<BossTankMine>();
+            if(mines.Length > 0)
+            {
+                foreach(BossTankMine foundMine in mines)
+                {
+                    foundMine.Explode();
+                }
+            }
+
+            gameObject.SetActive(false);
+            theBar.gameObject.SetActive(false);
+            bossActivator.gameObject.SetActive(true);
+        }
     }
 
     public void TakeHit()
@@ -146,7 +190,7 @@ public class BossTankController : MonoBehaviour
 
         anim.SetTrigger("Hit");
 
-        //Eliminar las minas al dañar al boss (Opcional)
+        //Delete mines when boss is damaged (Optional)
         BossTankMine[] mines = FindObjectsOfType<BossTankMine>();
         if(mines.Length > 0)
         {
